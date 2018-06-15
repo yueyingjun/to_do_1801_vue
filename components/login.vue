@@ -3,7 +3,7 @@
     <h3 style="text-align:center;padding:0;margin:0">登录页</h3>{{message}}
   <div class="form-group">
     <label for="user">用户名</label>
-    <input type="text" class="form-control" id="user" placeholder="用户名" name="uname" v-model="uname">
+    <input type="text" class="form-control" id="user" placeholder="用户名" name="uname" v-model="uname" autocomplete="off">
   </div>
   <!--
       页面加载速度慢
@@ -11,7 +11,7 @@
   -->
   <div class="form-group">
     <label for="pass">密码</label>
-    <input type="password" class="form-control" id="pass"  name="pass" v-model="pass">
+    <input type="password" class="form-control" id="pass"  name="pass" v-model="pass" autocomplete="off">
   </div>
 
   <button type="button" class="btn btn-default" @click="submit">Submit</button>
@@ -20,7 +20,6 @@
   </template>
 
 <script>
-  import "@/assets/js/ajax.js"
 export  default {
     data(){
       return {

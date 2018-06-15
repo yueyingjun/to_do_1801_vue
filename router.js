@@ -21,7 +21,7 @@ var router= new Router({
       },
       children:[
           {
-            path:"",
+            path:"/tudo/:id/:uid",
             component: Tudo,
           }
       ]

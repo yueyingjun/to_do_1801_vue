@@ -1,9 +1,5 @@
 <template>
     <div class="box">
-        <nav>
-            欢迎 {{uname}} 登陆
-            <span @click="logout">退出</span>
-        </nav>
         <div class="input">
             <input type="text" v-model="val" placeholder="请输入内容" @keydown.13="add">
         </div>
@@ -34,7 +30,8 @@ export default {
             uid:"",
             left:0,
             top:0,
-            display:"none"
+            display:"none",
+            did:""
         }
     },
     computed:{
@@ -48,15 +45,26 @@ export default {
             })
         }
     },
-    mounted(){
-
-             this.uname=sessionStorage["uname"]
-             this.uid=sessionStorage["uid"]
+    watch:{
+       $route(){
+           this.did=this.$route.params.id
+           this.uid=this.$route.params.uid
             var xml1=new XMLHttpRequest();
             xml1.onload= ()=> {
                 this.all=JSON.parse(xml1.response)
             }
-            xml1.open("get","/ajax/select?uid="+this.uid)
+            xml1.open("get","/ajax/select?uid="+this.uid+"&did="+this.did)
+            xml1.send();
+       }
+    },
+    mounted(){
+         this.did=this.$route.params.id
+           this.uid=this.$route.params.uid
+            var xml1=new XMLHttpRequest();
+            xml1.onload= ()=> {
+                this.all=JSON.parse(xml1.response)
+            }
+            xml1.open("get","/ajax/select?uid="+this.uid+"&did="+this.did)
             xml1.send();
 
 
@@ -97,7 +105,7 @@ export default {
            obj.edit=0
 
            //对列的方式
-           fetch("/ajax/add?val="+this.val+"&uid="+this.uid).then(function (e) {
+           fetch("/ajax/add?val="+this.val+"&uid="+this.uid+"&did="+this.did).then(function (e) {
               return e.text()
            }).then((e)=>{
                 if(e=="ok") {

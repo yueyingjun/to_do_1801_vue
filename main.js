@@ -6,6 +6,13 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(ElementUI);
 
+Vue.directive('focus', {
+  update: function (a,b) {
+    a.focus()
+  },
+})
+import "@/assets/js/ajax.js"
+
 import "@/assets/css/bootstrap.min.css"
 
 
